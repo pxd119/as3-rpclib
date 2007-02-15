@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Welcome Page
 
 = Introduction =
 
@@ -12,6 +12,5 @@ Usage mimics the RemoteObject which is available natively in [http://livedocs.ma
 = Updates =
 
   * Added library to downloads
-
 
 
