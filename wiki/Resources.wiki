@@ -1,9 +1,9 @@
 #summary Tutorials, External Links, Code Samples
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 = Documentation =
 
 Each RPC type is based on a AbstractRPCObject which mimics the native [RemoteObject http://livedocs.macromedia.com/flex/2/langref/]. Since the implementation is the same for the different RPC types (AMF0,XML-RPC and JSON-RPC), AbstractObject will be used to generalize them in the examples. Simple replace `<ak33m:AbstractObject>` with the appropriate tags:
-
+"*namespace declaration ak33m is assumed e.g. `<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:ak33m="com.ak33m.rpc.amf0.*>`"
 
 || *RPC Type* || *Package* || *AS Class* || *MXML Tag* ||
 || AMF0 (Flash Remoting) || `com.ak33m.rpc.amf0.*` || `AMF0Object` || `<ak33m:AMF0Object>` ||
@@ -15,9 +15,8 @@ Each RPC type is based on a AbstractRPCObject which mimics the native [RemoteObj
 = External Links=
 
 *Specifications*
-  * [XML-RPC http://www.xmlrpc.com/spec]
-  * [JSON-RPC http://json-rpc.org/wiki/specification]
-
+  * [http://www.xmlrpc.com/spec XML-RPC]
+  * [http://json-rpc.org/wiki/specification JSON-RPC]
 
 
 
