@@ -1,4 +1,5 @@
 #summary Welcome Page
+#labels Featured
 
 = Introduction =
 
@@ -12,5 +13,4 @@ Usage mimics the RemoteObject which is available natively in [http://livedocs.ma
 = Updates =
 
   * Added library to downloads
-
 
