@@ -195,7 +195,7 @@ package com.ak33m.rpc.xmlrpc
 			}
 			else if (robject.children().name() == TYPE_I4)
 			{
-				return int (robject.i4);
+				return new int (robject.i4);
 			}
 			else if (robject.children().name() == TYPE_BOOLEAN)
 			{
@@ -233,6 +233,10 @@ package com.ak33m.rpc.xmlrpc
 					tvalue[member.name] = decodeObject(member.value);
 				}
 				return tvalue;
+			}
+			else if (robject.children().name() == TYPE_DOUBLE)
+			{
+				return Number(robject.double);
 			}
 			else 
 			{
