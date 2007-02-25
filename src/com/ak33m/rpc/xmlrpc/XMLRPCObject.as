@@ -35,21 +35,15 @@ package com.ak33m.rpc.xmlrpc
 	import mx.core.IMXMLObject;
 	import mx.rpc.mxml.IMXMLSupport;
 	
-
-	
 	[Bindable]
 	/**
 	 * XMLRPCObject can be used to make XMLRPC calls. It mimics the RemoteObject implementation with a few exceptions.
 	 * @example <xmlrpc:XMLRPCObject id="wordpress" endpoint="http://localhost/" destination="wordpress/xmlrpc.php"></xmlrpc:XMLRPCObject>
 	*/
-	dynamic public class XMLRPCObject extends AbstractRPCObject implements IMXMLObject, IMXMLSupport
+	public dynamic class XMLRPCObject extends AbstractRPCObject implements IMXMLObject, IMXMLSupport
 	{
 		protected var _gateway:XMLRPCConnection;
-		public function XMLRPCObject (endpoint:String = null)
-		{
-			super();
-			this.endpoint = endpoint;
-		}
+		
 		/**
 		 * The root url of the xmlrpc path. 
 		 * @example endpoint="http://localhost/"

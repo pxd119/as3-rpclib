@@ -71,6 +71,7 @@ package com.ak33m.rpc.core
         protected var _id:String;
         protected var _view:Object;
         public var call:Function;
+        public var method:*;
         function AbstractRPCObject ()
         {
         	super();
@@ -259,6 +260,12 @@ package com.ak33m.rpc.core
 		{
 			this._view = view;
 			this._id = id;
+			trace (id);
+		}
+		
+		protected function send ():void
+		{
+			
 		}
 	}
 }
