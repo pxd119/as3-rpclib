@@ -164,7 +164,7 @@ package com.ak33m.rpc.xmlrpc
 			return new XMLList(tstructxml);
 		}
 		
-		public static function deserialize (rxmlresult:XMLDocument)
+		public static function deserialize (rxmlresult:XMLDocument):*
 		{
 			var xmlresult:XML = new XML(rxmlresult.toString());
 			var resultvaluexml:XMLList = xmlresult.params.param.value;
@@ -183,7 +183,7 @@ package com.ak33m.rpc.xmlrpc
 			}
 		}
 		
-		private static function decodeObject (robject:*)
+		private static function decodeObject (robject:*):*
 		{
 			if (robject.children().name() == TYPE_STRING)
 			{
@@ -240,8 +240,7 @@ package com.ak33m.rpc.xmlrpc
 			}
 			else 
 			{
-				var tstring:String = robject as String;
-				return tstring;
+				return String(robject);
 			}
 		}
 	}

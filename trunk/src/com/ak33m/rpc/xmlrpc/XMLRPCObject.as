@@ -76,6 +76,10 @@ package com.ak33m.rpc.xmlrpc
             responder.addEventListener(RPCEvent.EVENT_FAULT,this.onFault);
             responder.addEventListener(RPCEvent.EVENT_CANCEL,this.onRemoveResponder);
             ttoken.addResponder(responder);
+            
+            //Show Busy cursor 
+             this.respondercounter++;
+     
             return rpctoken;
 		}
 		
@@ -107,6 +111,9 @@ package com.ak33m.rpc.xmlrpc
 					}
 				}
 			}
+			
+			//this.onRemoveResponder(evt);
+			this.respondercounter--;
 		}
 		
 		override protected function onFault (evt:RPCEvent):void
@@ -121,12 +128,15 @@ package com.ak33m.rpc.xmlrpc
 					token.responders[i].fault.call(token.responders[i],faultevent);
 				}
 			}
+			
+			//this.onRemoveResponder(evt);
+			this.respondercounter--;
 		}
 		
 		 public function makeConnection ():void
-        {
+         {
         	this._gateway = new XMLRPCConnection(this._endpoint);
-        }
+         }
 		
 	}
 }

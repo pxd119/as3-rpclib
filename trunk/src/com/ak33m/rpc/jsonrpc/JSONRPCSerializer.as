@@ -30,7 +30,7 @@ package com.ak33m.rpc.jsonrpc
 			return jo;
 		}
 		
-		public static function deserialize (result:String)
+		public static function deserialize (result:String):*
 		{
 			return JSON.decode(result);
 	
