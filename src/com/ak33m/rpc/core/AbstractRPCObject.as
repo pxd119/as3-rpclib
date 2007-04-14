@@ -72,6 +72,8 @@ package com.ak33m.rpc.core
         protected var _view:Object;
         public var call:Function;
         public var method:*;
+ 		private var _respondercounter:int = 0;
+ 		
         function AbstractRPCObject ()
         {
         	super();
@@ -160,7 +162,7 @@ package com.ak33m.rpc.core
         }
         
         /**
-        * @private 
+        * Overrides the behavior of an object property that can be called as a function. 
         */
         flash_proxy override function callProperty (method : *,... args) : *
         {
@@ -204,17 +206,14 @@ package com.ak33m.rpc.core
             responder.addEventListener(RPCEvent.EVENT_CANCEL,this.onRemoveResponder);
             _responders.addItem(responder);
             var params : Array = args;
-            _isbusy = true;
-            if (showBusyCursor)
-            {
-                CursorManager.setBusyCursor();
-            }
+             //Show Busy cursor 
+             this.respondercounter++;
             return ttoken;
         }
         
-        protected function onRemoveResponder (event:Event):void
+        protected function onRemoveResponder (event:Event):void //This method should be deprecated
         {
-        	this._responders.removeItemAt(this._responders.getItemIndex(event.target));
+        	//this._responders.removeItemAt(this._responders.getItemIndex(event.target));
         }
         /**
         * RPCEvent result handler. This dispatches a result event and invokes the result function of the responders in the RPC token
@@ -232,6 +231,7 @@ package com.ak33m.rpc.core
 					token.responders[i].result.call(token.responders[i],resultevent);
 				}
 			}
+			this.respondercounter--;
 		}
 		
 		/**
@@ -241,10 +241,11 @@ package com.ak33m.rpc.core
 		{
 			var token:AsyncToken = evt.target.token;
 			token.message.body = evt.data;
+			var tfault:Fault;
 			if (evt.data.faultCode && evt.data.faultString)
-			var tfault:Fault = new Fault(evt.data.faultCode,evt.data.faultString,evt.data.faultDetail);
+			tfault = new Fault(evt.data.faultCode,evt.data.faultString,evt.data.faultDetail);
 			else
-			var tfault:Fault = new Fault(evt.data.code,evt.data.description,evt.data.details);
+			tfault = new Fault(evt.data.code,evt.data.description,evt.data.details);
 			var faultevent:FaultEvent = new FaultEvent(FaultEvent.FAULT,true,true,tfault,token,token.message);
 			dispatchEvent(faultevent);
 			if (token.hasResponder())
@@ -254,6 +255,7 @@ package com.ak33m.rpc.core
 					token.responders[i].fault.call(token.responders[i],faultevent);
 				}
 			}
+			this.respondercounter--;
 		}
 		
 		public function initialized(view:Object,id:String):void
@@ -267,6 +269,27 @@ package com.ak33m.rpc.core
 		{
 			
 		}
+		
+		protected function set respondercounter (counter:int):void
+         {
+         	this._respondercounter = counter;
+         	if (this._respondercounter ==0)
+         	{
+         		CursorManager.removeBusyCursor();
+         		this._isbusy = false;
+         		//CursorManager.hideCursor();
+         	}
+         	else if (this.showBusyCursor && !this._isbusy)
+         	{
+         		this._isbusy = true;
+                CursorManager.setBusyCursor();
+         	}
+         }
+         
+         protected function get respondercounter ():int
+         {
+         	return this._respondercounter;
+         }
 	}
 }
 internal class AbstractRestriction

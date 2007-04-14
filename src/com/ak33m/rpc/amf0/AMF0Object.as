@@ -57,11 +57,6 @@ package com.ak33m.rpc.amf0
             responder.addEventListener(RPCEvent.EVENT_CANCEL,this.onRemoveResponder);
             _responders.addItem(responder);
             var params : Array = args;
-            _isbusy = true;
-            if (showBusyCursor)
-            {
-                CursorManager.setBusyCursor();
-            }
             
              if (args.length > 0)
             {
@@ -73,6 +68,9 @@ package com.ak33m.rpc.amf0
                 this._gateway.call(this._destination+"."+method,responder);
             }
             dispatchEvent (new InvokeEvent("invoke",false,true,ttoken,ttoken.message));
+            
+             //Show Busy cursor 
+             this.respondercounter++;
             return ttoken;
         }
         
