@@ -55,6 +55,49 @@ package com.ak33m.rpc.xmlrpc
 		}
 		
 		/**
+		 * Set request headers
+		 * @example 
+		 * <code>
+		 * var headers:Object = new Object();
+		   headers["CustomHeaderA"] = "SomeValue";
+		   headers["CustomHeaderB"] = "SomeValue";
+		   xmprpcobject.headers = headers;
+		   </code>
+		 */
+		public function set headers (headers:Object):void
+		{
+			this._gateway.headers = headers;
+		}
+		
+		public function get headers ():Object
+		{
+			return this._gateway.headers;
+		}
+		
+		/**
+		 * set if to use proxy
+		 */
+		public function set useProxy (useproxy:Boolean):void
+		{
+			this._gateway.useProxy = useproxy;
+		}
+		
+		public function get useProxy ():Boolean
+		{
+			return this._gateway.useProxy;
+		}
+		
+		override public function setCredentials (username:String,password:String):void
+		{
+			this._gateway.setCredentials(username,password);
+		}
+		
+		override public function setRemoteCredentials (username:String,password:String):void
+		{
+			this._gateway.setRemoteCredentials(username,password);
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override protected function makeCall(method:String, args:Array):AsyncToken
@@ -132,6 +175,8 @@ package com.ak33m.rpc.xmlrpc
 			//this.onRemoveResponder(evt);
 			this.respondercounter--;
 		}
+		
+		
 		
 		 public function makeConnection ():void
          {
