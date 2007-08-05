@@ -104,7 +104,7 @@ package com.ak33m.rpc.xmlrpc
 		{
 			this._gateway.url = this.endpoint+this.destination;
 			this._gateway.request = "POST";
-			this._gateway.contentType = "application/xml";
+			this._gateway.contentType = "text/xml";
 			this._gateway.resultFormat = "object"; //Must be set to object in order for the xmlDecode to be used
 			this._gateway.xmlDecode = XMLRPCSerializer.deserialize; //Converts results to AS3 objects
 			this._gateway.requestTimeout = this.requestTimeout;
