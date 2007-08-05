@@ -26,6 +26,7 @@ package com.ak33m.rpc.xmlrpc
 	import com.ak33m.rpc.core.IRPCConnection;
 	import flash.net.Responder;
 	import mx.rpc.http.HTTPService;
+	import flash.net.URLRequestHeader;
 
 	public class XMLRPCConnection extends HTTPService  implements IRPCConnection
 	{	
