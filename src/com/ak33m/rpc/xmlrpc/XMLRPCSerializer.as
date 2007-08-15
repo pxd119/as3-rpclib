@@ -204,7 +204,7 @@ package com.ak33m.rpc.xmlrpc
 			else if (robject.children().name()== TYPE_DATE)
 			{
 				var tdatestring:String = robject.children();
-				var datepattern:RegExp = /^(-?\d\d\d\d)-?(\d\d)-?(\d\d)T(\d\d):(\d\d):(\d\d)$/;
+				var datepattern:RegExp = /^(-?\d\d\d\d)-?(\d\d)-?(\d\d)T(\d\d):(\d\d):(\d\d)/;
 				var d:Array = tdatestring.match(datepattern);
 				var tdate:Date =  new Date(d[1],d[2]-1,d[3],d[4],d[5],d[6]);
 				return tdate;
