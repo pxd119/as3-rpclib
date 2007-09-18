@@ -43,7 +43,7 @@ package com.ak33m.rpc.xmlrpc
 	public dynamic class XMLRPCObject extends AbstractRPCObject implements IMXMLObject, IMXMLSupport
 	{
 		protected var _gateway:XMLRPCConnection;
-		
+		protected var _contentType:String = "text/xml"; //This content type is true to the xmlrpc spec
 		/**
 		 * The root url of the xmlrpc path. 
 		 * @example endpoint="http://localhost/"
@@ -97,6 +97,16 @@ package com.ak33m.rpc.xmlrpc
 			this._gateway.setRemoteCredentials(username,password);
 		}
 		
+		public function set contentType (contenttype:String):void
+		{
+			this._contentType = contenttype;
+		}
+		
+		public function get contentType ():String
+		{
+			return this._contentType;
+		}
+		
 		/**
 		 * @inheritDoc
 		 */
@@ -104,7 +114,7 @@ package com.ak33m.rpc.xmlrpc
 		{
 			this._gateway.url = this.endpoint+this.destination;
 			this._gateway.request = "POST";
-			this._gateway.contentType = "text/xml";
+			this._gateway.contentType = this._contentType;
 			this._gateway.resultFormat = "object"; //Must be set to object in order for the xmlDecode to be used
 			this._gateway.xmlDecode = XMLRPCSerializer.deserialize; //Converts results to AS3 objects
 			this._gateway.requestTimeout = this.requestTimeout;
