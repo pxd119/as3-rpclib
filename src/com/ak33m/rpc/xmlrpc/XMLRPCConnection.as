@@ -33,6 +33,7 @@ package com.ak33m.rpc.xmlrpc
 		public function XMLRPCConnection (rootURL:String=null)
 		{
 			super(rootURL);
+			this.method = "post";
 		}
 		
 		public function call(command:String,responder:Responder,...args):void

@@ -113,7 +113,8 @@ package com.ak33m.rpc.xmlrpc
 		
 		private static function encodeBoolean (rboolean:Boolean):XMLList
 		{
-			return new XMLList("<"+TYPE_BOOLEAN+">"+rboolean+"</"+TYPE_BOOLEAN+">");
+			var xmlrpcboolean:String = rboolean ? "1" : "0";
+			return new XMLList("<"+TYPE_BOOLEAN+">"+xmlrpcboolean+"</"+TYPE_BOOLEAN+">");
 		}
 		
 		private static function encodeInteger (rinteger:int):XMLList
