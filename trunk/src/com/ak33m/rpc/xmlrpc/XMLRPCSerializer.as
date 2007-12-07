@@ -200,7 +200,19 @@ package com.ak33m.rpc.xmlrpc
 			}
 			else if (robject.children().name() == TYPE_BOOLEAN)
 			{
-				return Boolean(robject.boolean);
+				if (isNaN(robject.boolean))
+				{
+					if (String(robject.boolean).toLowerCase() == "true")
+					return true;
+					else if (String(robject.boolean).toLowerCase() == "false")
+					return false;
+					else
+					return null;
+				}
+				else
+				{
+					return Boolean(Number(robject.boolean));
+				}
 			}
 			else if (robject.children().name()== TYPE_DATE)
 			{
