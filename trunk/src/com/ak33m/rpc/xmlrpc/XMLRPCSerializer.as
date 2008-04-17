@@ -98,6 +98,10 @@ package com.ak33m.rpc.xmlrpc
 			{
 				txmllist =  encodeStruct(tobject.getPropertyData());
 			}
+			else if (tobject is Object)
+			{
+				txmllist =  encodeStruct(tobject);
+			}
 			else
 			{
 				txmllist = encodeString(tobject as String);
