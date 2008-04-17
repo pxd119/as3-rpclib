@@ -130,7 +130,7 @@ package com.ak33m.rpc.xmlrpc
 		protected static function encodeDate (rdate:Date):XMLList
 		{
 			var tdateformatter:DateFormatter = new DateFormatter();
-			tdateformatter.formatString = "YYYYMMDDTJ:NN:SS";
+			tdateformatter.formatString = "YYYYMMDDTJJ:NN:SS";
 			var tdatestring:String = tdateformatter.format(rdate);
 			return new XMLList("<"+TYPE_DATE+">"+tdatestring+"</"+TYPE_DATE+">");
 		}
