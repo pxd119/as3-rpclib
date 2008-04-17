@@ -153,7 +153,7 @@ package com.ak33m.rpc.xmlrpc
 		{
 			var enc:Base64Encoder = new Base64Encoder();
 			enc.encodeBytes(rbase64);
-			return new XMLList("<"+TYPE_BASE64+">"+enc.drain()+"</"+TYPE_BASE64+">");
+			return new XMLList("<"+TYPE_BASE64+">"+enc.flush()+"</"+TYPE_BASE64+">");
 		}
 		
 		protected static function encodeStruct (rprops:*):XMLList
