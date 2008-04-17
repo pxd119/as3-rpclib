@@ -67,7 +67,7 @@ package com.ak33m.rpc.xmlrpc
 			return xmlrpc;		
 		}
 		
-		private static function encodeObject (tobject:*):XMLList
+		protected static function encodeObject (tobject:*):XMLList
 		{
 			var txmllist:XMLList;
 			if (tobject is String)
@@ -106,28 +106,28 @@ package com.ak33m.rpc.xmlrpc
 			return txmllist;
 		}
 		
-		private static function encodeString(rstring:String):XMLList
+		protected static function encodeString(rstring:String):XMLList
 		{
 			return new XMLList("<"+TYPE_STRING+">"+rstring+"</"+TYPE_STRING+">");
 		}
 		
-		private static function encodeBoolean (rboolean:Boolean):XMLList
+		protected static function encodeBoolean (rboolean:Boolean):XMLList
 		{
 			var xmlrpcboolean:String = rboolean ? "1" : "0";
 			return new XMLList("<"+TYPE_BOOLEAN+">"+xmlrpcboolean+"</"+TYPE_BOOLEAN+">");
 		}
 		
-		private static function encodeInteger (rinteger:int):XMLList
+		protected static function encodeInteger (rinteger:int):XMLList
 		{
 			return new XMLList("<"+TYPE_INT+">"+rinteger+"</"+TYPE_INT+">");
 		}
 		
-		private static function encodeDouble (rdouble:Number):XMLList
+		protected static function encodeDouble (rdouble:Number):XMLList
 		{
 			return new XMLList("<"+TYPE_DOUBLE+">"+rdouble+"</"+TYPE_DOUBLE+">");
 		}
 		
-		private static function encodeDate (rdate:Date):XMLList
+		protected static function encodeDate (rdate:Date):XMLList
 		{
 			var tdateformatter:DateFormatter = new DateFormatter();
 			tdateformatter.formatString = "YYYYMMDDTJ:NN:SS";
@@ -135,7 +135,7 @@ package com.ak33m.rpc.xmlrpc
 			return new XMLList("<"+TYPE_DATE+">"+tdatestring+"</"+TYPE_DATE+">");
 		}
 		
-		private static function encodeArray (rarray:Array):XMLList
+		protected static function encodeArray (rarray:Array):XMLList
 		{
 			var tarrayxml:XML = <array>
 								</array>
@@ -149,12 +149,14 @@ package com.ak33m.rpc.xmlrpc
 			return new XMLList(tarrayxml);
 		}
 		
-		private static function encodeBase64 (rbase64:ByteArray):XMLList
+		protected static function encodeBase64 (rbase64:ByteArray):XMLList
 		{
-			return new XMLList("<base64>"+rbase64+"</base64>");
+			var enc:Base64Encoder = new Base64Encoder();
+			enc.encodeBytes(rbase64);
+			return new XMLList("<"+TYPE_BASE64+">"+enc.drain()+"</"+TYPE_BASE64+">");
 		}
 		
-		private static function encodeStruct (rprops:*):XMLList
+		protected static function encodeStruct (rprops:*):XMLList
 		{
 			var tstructxml:XML = <struct>
 								 </struct>
@@ -184,7 +186,7 @@ package com.ak33m.rpc.xmlrpc
 			}
 		}
 		
-		private static function decodeObject (robject:*):*
+		protected static function decodeObject (robject:*):*
 		{
 			if (robject.children().name() == TYPE_STRING)
 			{
